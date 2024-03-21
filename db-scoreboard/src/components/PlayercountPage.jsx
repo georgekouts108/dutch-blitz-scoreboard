@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function PlayercountPage() {
+    const navigate = useNavigate();
     const [playerCount, setPlayerCount] = useState(4);
 
     const updatePlayerCount = (up) => {
@@ -20,7 +22,7 @@ function PlayercountPage() {
             <button onClick={() => updatePlayerCount(true)}>+</button>
             <br/><br/><br/>
             <button>Confirm</button><br/><br/>
-            <button>Return to Home</button>
+            <button onClick={() => navigate('/')}>Return to Home</button>
         </>
     )
 }
