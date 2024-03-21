@@ -12,13 +12,14 @@ function PlayerinfoPage() {
         event.preventDefault();
         console.log("Player names:");
         console.log(playerNames);
+        navigate('/winning-points');
     }
     const updatePlayerName = (index, value) => {
         const updatedPlayerNames = [...playerNames];
         updatedPlayerNames[index] = value;
         setPlayerNames(updatedPlayerNames);
     }
-    
+ 
     return (
         <>
             <h1>Enter the names of the {numOfPlayers} player(s)</h1>

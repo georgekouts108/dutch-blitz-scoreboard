@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import IntroPage from './components/IntroPage'
 import PlayercountPage from './components/PlayercountPage'
 import PlayerinfoPage from './components/PlayerinfoPage';
+import WinningPointsPage from './components/WinningPointsPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path='/' Component={IntroPage}/>
           <Route path="/player-count" Component={PlayercountPage} />
           <Route path="/player-info" Component={PlayerinfoPage}/>
+          <Route path="/winning-points" Component={WinningPointsPage}/>
         </Routes>
       </Router>
     </>
