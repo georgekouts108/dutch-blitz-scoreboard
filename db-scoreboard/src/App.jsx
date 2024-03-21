@@ -6,6 +6,7 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import IntroPage from './components/IntroPage'
 import PlayercountPage from './components/PlayercountPage'
+import PlayerinfoPage from './components/PlayerinfoPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route exact path='/' Component={IntroPage}/>
           <Route path="/player-count" Component={PlayercountPage} />
+          <Route path="/player-info" Component={PlayerinfoPage}/>
         </Routes>
       </Router>
     </>
