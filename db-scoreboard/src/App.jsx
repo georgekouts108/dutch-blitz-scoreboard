@@ -4,12 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 import IntroPage from './components/IntroPage'
-
+import PlayercountPage from './components/PlayercountPage'
 function App() {
   
   return (
     <>
-      
+  
     </>
   )
 }
