@@ -55,7 +55,13 @@ function PlayerinfoPage() {
             <br></br>
             
 
-            <button onClick={() => navigate('/player-count')}>Change Player Count</button>
+            <button onClick={() => navigate('/player-count', {
+                state: {
+                    origialPlayerCount: numOfPlayers,
+                    playerNames: playerNames,
+                    isUpdatingCount: true
+                }
+            })}>Change Player Count</button>
         </>
     )
 }

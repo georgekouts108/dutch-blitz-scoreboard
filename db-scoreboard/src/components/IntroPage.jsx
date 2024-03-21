@@ -8,7 +8,13 @@ function IntroPage() {
         <>
             <h1>Dutch Blitz</h1>
             <h2>Scoreboard for the vonderful goot game</h2>
-            <button onClick={()=>navigate('/player-count')}>Begin A New Game</button>
+            <button onClick={()=>navigate('/player-count',{
+                state: {
+                    origialPlayerCount: undefined,
+                    playerNames: undefined,
+                    isUpdatingCount:false
+                }
+            })}>Begin A New Game</button>
         </>
     )
 }
