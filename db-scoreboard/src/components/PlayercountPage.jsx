@@ -21,7 +21,14 @@ function PlayercountPage() {
             <button onClick={() => updatePlayerCount(false)}>-</button>
             <button onClick={() => updatePlayerCount(true)}>+</button>
             <br/><br/><br/>
-            <button onClick={() => navigate('/player-info', { state: { numOfPlayers: playerCount } })}>Confirm</button><br/><br/>
+            <button onClick={() => navigate(`/player-info`, { 
+                state: { 
+                    numOfPlayers: playerCount,
+                    editingNames: false,
+                    playerNames: undefined 
+                } 
+                }) 
+            }  >Confirm</button><br/><br/>
             <button onClick={() => navigate('/')}>Return to Home</button>
         </>
     )

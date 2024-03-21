@@ -4,15 +4,24 @@ import { useNavigate, useLocation } from 'react-router-dom';
 function PlayerinfoPage() {
     const navigate = useNavigate();
     const location = useLocation();
+    
     const numOfPlayers = location.state?.numOfPlayers;
+    const isEditing = location.state?.editingNames;
+    const _playerNames = location.state?.playerNames;
+    
 
-    const [playerNames, setPlayerNames] = useState(Array(numOfPlayers).fill(''));
+    const [playerNames, setPlayerNames] = useState(isEditing ? _playerNames : Array(numOfPlayers).fill('') );
 
     const confirmPlayerInfo = (event) => {
         event.preventDefault();
         console.log("Player names:");
         console.log(playerNames);
-        navigate('/winning-points');
+        navigate('/winning-points', { 
+            state: { 
+                numOfPlayers: numOfPlayers,
+                playerNames: playerNames
+            } 
+        });
     }
     const updatePlayerName = (index, value) => {
         const updatedPlayerNames = [...playerNames];
@@ -28,6 +37,7 @@ function PlayerinfoPage() {
                 {
                     playerNames.map((value, index) => (
                         <div key={index}>
+                            < label>PLAYER {index+1}:    </label>
                             <input required
                                 type="text" 
                                 value={value} 
