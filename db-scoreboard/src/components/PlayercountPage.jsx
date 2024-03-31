@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function PlayercountPage() {
@@ -13,16 +13,19 @@ function PlayercountPage() {
     const [playerCount, setPlayerCount] = useState(origialPlayerCount !== undefined ? origialPlayerCount :  4);
 
     const updatePlayerCount = (up) => {
+        let newVal = playerCount
         if (up && playerCount < 8){
-            setPlayerCount(playerCount+1)
+            newVal += 1
         }
         else if (!up && playerCount > 2){
-            setPlayerCount(playerCount-1)
+            newVal -= 1
         }
-
+        setPlayerCount(newVal)
+    }
+    useEffect(() => {
         document.getElementById("count-warning").innerHTML = (playerCount < origialPlayerCount ? 
             `WARNING: If you choose less than ${origialPlayerCount} players, you'll need to retype all players' names` : "")
-    }
+      }, [playerCount])
 
     const getUpdatedPlayerNames = () => {
         let updated = [];
@@ -48,14 +51,11 @@ function PlayercountPage() {
                 updated = Array(playerCount).fill('')
                 result = false;
             }
-
         }
         else {
-            updated= Array(playerCount).fill('')
+            updated = Array(playerCount).fill('')
         }
-        console.log("DEBUGGGZZZ: "+updated)
         return [updated,result];
-        
     }
     return (
         <>
