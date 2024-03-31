@@ -19,10 +19,10 @@ function WinningPointsPage() {
         }
     }
 
-    const dummyFunction = () => {
-        console.log("player names:")
-        for (let p = 0; p < playerNames.length; p++) {
-            console.log("   "+playerNames[p])
+    const startGame = () => {
+        console.log("players:")
+        for (let p = 0; p < players.length; p++) {
+            console.log(players[p])
         }
         console.log("winning points: "+winningPoints)
     }
@@ -35,7 +35,7 @@ function WinningPointsPage() {
             <button onClick={() => changeWinningPoints(false)}>-5</button>
             <button onClick={() => changeWinningPoints(true)}>+5</button>
             <br/><br/><br/>
-            <button onClick={dummyFunction}>Start Game!</button><br/><br/>
+            <button onClick={startGame}>Start Game!</button><br/><br/>
             <button onClick={() => navigate(`/player-info`, { 
                 state: { 
                     playerNames: playerNames,
