@@ -19,25 +19,16 @@ import '../styles/playerInfoPage.css'
 function PlayerinfoPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    
-    const numOfPlayers = location.state?.numOfPlayers;
-    const isEditing = location.state?.editingNames;
-    const _playerNames = location.state?.playerNames;
-    
+        
     const cardSymbols = [symbol1, symbol2, symbol3, symbol4, symbol5, symbol6, symbol7, 
     symbol8, symbol9, symbol10, symbol11, symbol12]
 
-
-
-    //const [playerNames, setPlayerNames] = useState(isEditing ? _playerNames : Array(numOfPlayers).fill('') );
-    
-    const [playerNames2, setPlayerNames2] = useState( Array(12).fill('') );
+    const [playerNames, setPlayerNames] = useState( Array(12).fill('') );
     
     const confirmPlayerInfo = (event) => {
         event.preventDefault();
         console.log("Player names:");
-        console.log(playerNames2);
-        
+        console.log(playerNames);
         
         // navigate('/winning-points', { 
         //     state: { 
@@ -46,14 +37,9 @@ function PlayerinfoPage() {
         //     } 
         // });
     }
-    // const updatePlayerName = (index, value) => {
-    //     const updatedPlayerNames = [...playerNames];
-    //     updatedPlayerNames[index] = value;
-    //     setPlayerNames(updatedPlayerNames);
-    // }
-
+    
     const updatePlayerName2 = (index, value) => {
-        const updatedPlayerNames = [...playerNames2];
+        const updatedPlayerNames = [...playerNames];
         updatedPlayerNames[index] = value;
         setPlayerNames2(updatedPlayerNames);
     }
@@ -66,13 +52,13 @@ function PlayerinfoPage() {
             <form onSubmit={confirmPlayerInfo}>
                 <div className="row">
                 {
-                    playerNames2.slice(0,4).map((value, index) => (
+                    playerNames.slice(0,4).map((value, index) => (
                         <div className="block" key={index}>
                             <div>
                             <img src={cardSymbols[index]} alt="hhh" height={150} width={150}/>
                             </div>
                             
-                            <input required
+                            <input 
                                 type="text" 
                                 value={value} 
                                 onChange={(e) => updatePlayerName2(index, e.target.value)}
@@ -85,13 +71,13 @@ function PlayerinfoPage() {
                 </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <div className="row">
                 {
-                    playerNames2.slice(4,8).map((value, index) => (
+                    playerNames.slice(4,8).map((value, index) => (
                         <div className="block" key={index+4}>
                             <div>
                             <img src={cardSymbols[index+4]} alt="hhh" height={150} width={150}/>
                             </div>
                             
-                            <input required
+                            <input 
                                 type="text" 
                                 value={value} 
                                 onChange={(e) => updatePlayerName2(index+4, e.target.value)}
@@ -104,13 +90,13 @@ function PlayerinfoPage() {
                 </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <div className="row">
                 {
-                    playerNames2.slice(8).map((value, index) => (
+                    playerNames.slice(8).map((value, index) => (
                         <div className="block" key={index+8}>
                             <div>
                             <img src={cardSymbols[index+8]} alt="hhh" height={150} width={150}/>
                             </div>
                             
-                            <input required
+                            <input 
                                 type="text" 
                                 value={value} 
                                 onChange={(e) => updatePlayerName2(index+8, e.target.value)}
@@ -127,15 +113,6 @@ function PlayerinfoPage() {
             </form>
             </div>
             <br></br>
-            
-
-            <button onClick={() => navigate('/player-count', {
-                state: {
-                    origialPlayerCount: numOfPlayers,
-                    playerNames: playerNames2,
-                    isUpdatingCount: true
-                }
-            })}>Change Player Count</button>
         </>
     )
 }
