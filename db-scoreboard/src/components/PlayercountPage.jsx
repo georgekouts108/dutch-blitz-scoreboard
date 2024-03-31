@@ -14,7 +14,7 @@ function PlayercountPage() {
 
     const updatePlayerCount = (up) => {
         let newVal = playerCount
-        if (up && playerCount < 8){
+        if (up && playerCount < 12){
             newVal += 1
         }
         else if (!up && playerCount > 2){
@@ -63,7 +63,7 @@ function PlayercountPage() {
             <br></br>
             <h1>{playerCount}</h1>
             <button disabled={playerCount === 2} onClick={() => updatePlayerCount(false)}>-</button>
-            <button disabled={playerCount === 8} onClick={() => updatePlayerCount(true)}>+</button>
+            <button disabled={playerCount === 12} onClick={() => updatePlayerCount(true)}>+</button>
             <br/><br/>
 
             <p id="count-warning"></p>
