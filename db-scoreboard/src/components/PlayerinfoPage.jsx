@@ -19,29 +19,46 @@ import '../styles/playerInfoPage.css'
 function PlayerinfoPage() {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const editingNames = location.state?.editingNames;
+    const _playerNames = location.state?.playerNames;
         
     const cardSymbols = [symbol1, symbol2, symbol3, symbol4, symbol5, symbol6, symbol7, 
     symbol8, symbol9, symbol10, symbol11, symbol12]
 
-    const [playerNames, setPlayerNames] = useState( Array(12).fill('') );
+    const [playerNames, setPlayerNames] = useState(editingNames ? _playerNames : Array(12).fill('') );
     
     const confirmPlayerInfo = (event) => {
         event.preventDefault();
         console.log("Player names:");
         console.log(playerNames);
         
-        // navigate('/winning-points', { 
-        //     state: { 
-        //         numOfPlayers: numOfPlayers,
-        //         playerNames: playerNames
-        //     } 
-        // });
+        const finalPlayerInfo = []
+        let playerCount = 0
+        for (let p = 0; p < playerNames.length; p++){
+            if (playerNames[p] !== ''){
+                playerCount++;
+                const next_player = {
+                    pid: p,
+                    pname: playerNames[p],
+                    pnum: playerCount
+                }
+                finalPlayerInfo.push(next_player)
+            }
+        }
+        
+        navigate('/winning-points', { 
+            state: { 
+                players: finalPlayerInfo,
+                playerNames: playerNames
+            } 
+        });
     }
     
-    const updatePlayerName2 = (index, value) => {
+    const updatePlayerName = (index, value) => {
         const updatedPlayerNames = [...playerNames];
         updatedPlayerNames[index] = value;
-        setPlayerNames2(updatedPlayerNames);
+        setPlayerNames(updatedPlayerNames);
     }
  
     return (
@@ -61,7 +78,7 @@ function PlayerinfoPage() {
                             <input 
                                 type="text" 
                                 value={value} 
-                                onChange={(e) => updatePlayerName2(index, e.target.value)}
+                                onChange={(e) => updatePlayerName(index, e.target.value)}
                                 placeholder={`Player ${index + 1}'s Name`} 
                             />
                             <br/><br/>
@@ -80,7 +97,7 @@ function PlayerinfoPage() {
                             <input 
                                 type="text" 
                                 value={value} 
-                                onChange={(e) => updatePlayerName2(index+4, e.target.value)}
+                                onChange={(e) => updatePlayerName(index+4, e.target.value)}
                                 placeholder={`Player ${index+4 + 1}'s Name`} 
                             />
                             <br/><br/>
@@ -99,7 +116,7 @@ function PlayerinfoPage() {
                             <input 
                                 type="text" 
                                 value={value} 
-                                onChange={(e) => updatePlayerName2(index+8, e.target.value)}
+                                onChange={(e) => updatePlayerName(index+8, e.target.value)}
                                 placeholder={`Player ${index+8 + 1}'s Name`} 
                             />
                             <br/><br/>

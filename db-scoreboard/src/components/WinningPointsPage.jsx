@@ -5,7 +5,7 @@ function WinningPointsPage() {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const numOfPlayers = location.state?.numOfPlayers;
+    const players = location.state?.players;
     const playerNames = location.state?.playerNames;
 
     const [winningPoints, setWinningPoints] = useState(75);
@@ -20,13 +20,13 @@ function WinningPointsPage() {
     }
 
     const dummyFunction = () => {
-        console.log("number of players: "+numOfPlayers)
         console.log("player names:")
         for (let p = 0; p < playerNames.length; p++) {
             console.log("   "+playerNames[p])
         }
         console.log("winning points: "+winningPoints)
     }
+
     return (
         <>
             <h1>How many points are needed to win?</h1>
@@ -38,7 +38,6 @@ function WinningPointsPage() {
             <button onClick={dummyFunction}>Start Game!</button><br/><br/>
             <button onClick={() => navigate(`/player-info`, { 
                 state: { 
-                    numOfPlayers: numOfPlayers,
                     playerNames: playerNames,
                     editingNames: true
                 } 
