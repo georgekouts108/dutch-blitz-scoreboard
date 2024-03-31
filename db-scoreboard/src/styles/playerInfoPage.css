@@ -1,0 +1,13 @@
+.row {
+    width: 100%;
+    margin: 0 auto;
+  }
+.block {
+    width: 230px;
+    float: left;
+}
+
+.player-info-form {
+    width: auto;
+    margin: auto; 
+}
