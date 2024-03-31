@@ -62,8 +62,8 @@ function PlayercountPage() {
             <h1>How many people are playing?</h1>
             <br></br>
             <h1>{playerCount}</h1>
-            <button onClick={() => updatePlayerCount(false)}>-</button>
-            <button onClick={() => updatePlayerCount(true)}>+</button>
+            <button disabled={playerCount === 2} onClick={() => updatePlayerCount(false)}>-</button>
+            <button disabled={playerCount === 8} onClick={() => updatePlayerCount(true)}>+</button>
             <br/><br/>
 
             <p id="count-warning"></p>
