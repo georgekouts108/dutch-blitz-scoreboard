@@ -10,13 +10,8 @@ function WinningPointsPage() {
 
     const [winningPoints, setWinningPoints] = useState(75);
 
-    const changeWinningPoints = (up) => {
-        if (up && winningPoints < 150){
-            setWinningPoints(winningPoints + 5)
-        }
-        else if (!up && winningPoints > 75){
-            setWinningPoints(winningPoints - 5)
-        }
+    const changeWinningPoints = (up, amount) => {
+        setWinningPoints(up ? Math.min(150, winningPoints + amount) : Math.max(75, winningPoints - amount));
     }
 
     const startGame = () => {
@@ -32,8 +27,10 @@ function WinningPointsPage() {
             <h1>How many points are needed to win?</h1>
             <br></br>
             <h1>{winningPoints}</h1>
-            <button onClick={() => changeWinningPoints(false)}>-5</button>
-            <button onClick={() => changeWinningPoints(true)}>+5</button>
+            <button disabled={winningPoints===75} onClick={() => changeWinningPoints(false, 5)}>-5</button>
+            <button disabled={winningPoints===150} onClick={() => changeWinningPoints(true, 5)}>+5</button>
+            <button disabled={winningPoints===75} onClick={() => changeWinningPoints(false, 1)}>-1</button>
+            <button disabled={winningPoints===150} onClick={() => changeWinningPoints(true, 1)}>+1</button>
             <br/><br/><br/>
             <button onClick={startGame}>Start Game!</button><br/><br/>
             <button onClick={() => navigate(`/player-info`, { 
