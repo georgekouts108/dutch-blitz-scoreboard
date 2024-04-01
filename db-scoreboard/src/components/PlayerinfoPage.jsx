@@ -1,20 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import symbol1 from '../images/db_card_icons/symbol_1.png'
-import symbol2 from '../images/db_card_icons/symbol_2.png'
-import symbol3 from '../images/db_card_icons/symbol_3.png'
-import symbol4 from '../images/db_card_icons/symbol_4.png'
-import symbol5 from '../images/db_card_icons/symbol_5.png'
-import symbol6 from '../images/db_card_icons/symbol_6.png'
-import symbol7 from '../images/db_card_icons/symbol_7.png'
-import symbol8 from '../images/db_card_icons/symbol_8.png'
-import symbol9 from '../images/db_card_icons/symbol_9.png'
-import symbol10 from '../images/db_card_icons/symbol_10.png'
-import symbol11 from '../images/db_card_icons/symbol_11.png'
-import symbol12 from '../images/db_card_icons/symbol_12.png'
-
 import '../styles/playerInfoPage.css'
+import { cardSymbols } from "../assets/card_symbols/card_symbols";
 
 function PlayerinfoPage() {
     const navigate = useNavigate();
@@ -22,9 +10,6 @@ function PlayerinfoPage() {
 
     const editingNames = location.state?.editingNames;
     const _playerNames = location.state?.playerNames;
-        
-    const cardSymbols = [symbol1, symbol2, symbol3, symbol4, symbol5, symbol6, symbol7, 
-    symbol8, symbol9, symbol10, symbol11, symbol12]
 
     const [playerNames, setPlayerNames] = useState(editingNames ? _playerNames : Array(12).fill('') );
     

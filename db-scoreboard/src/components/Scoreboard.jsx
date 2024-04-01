@@ -6,15 +6,18 @@ function Scoreboard() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const _players = location.state?.players;
-    const _pointsToWin = location.state?.pointsToWin;
-
-    const [players, setPlayers] = useState(_players);
-    const [pointsToWin, setPointsToWin] = useState(_pointsToWin);
+    const [players, setPlayers] = useState(location.state?.players);
+    const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
+    const [roundCount, setRoundCount] = useState(0);
 
     return (
         <>
             <h1>Scoreboard</h1>
+            
+            <h2>Be the first to reach {pointsToWin} points or more!</h2>
+            <h3>{players[3].name}</h3>
+            <button>Quit Game</button>
+            <button>Start Next Round!</button>
         </>
     )
 }
