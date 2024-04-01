@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Ranks } from "../assets/ranks";
 
 function WinningPointsPage() {
     const navigate = useNavigate();
@@ -17,9 +18,18 @@ function WinningPointsPage() {
     const startGame = () => {
         console.log("players:")
         for (let p = 0; p < players.length; p++) {
+            players[p].grandTotal = 0
+            players[p].rank = Ranks.FIRST
             console.log(players[p])
         }
         console.log("winning points: "+winningPoints)
+
+        navigate('/scoreboard', { 
+            state: { 
+                players: players,
+                pointsToWin: winningPoints
+            } 
+        });
     }
 
     return (
