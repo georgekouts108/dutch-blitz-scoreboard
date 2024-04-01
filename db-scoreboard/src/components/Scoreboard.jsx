@@ -19,6 +19,22 @@ function Scoreboard() {
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
     const [roundCount, setRoundCount] = useState(0);
 
+
+    const startNewRound = () => {
+        setRoundCount(roundCount + 1);
+    }
+    useEffect(() => {
+        if (roundCount > 0){
+            navigate('/round-in-progress', { 
+                state: { 
+                    roundNumber: roundCount,
+                    players: players
+                } 
+            });
+        }
+        
+    }, [roundCount])
+
     return (
         <>
             <h1>Scoreboard</h1>
@@ -34,7 +50,7 @@ function Scoreboard() {
                 }<br></br>
             </div>
             <button>Quit Game</button>
-            <button>Start Next Round!</button>
+            <button onClick={startNewRound}>Start Round {roundCount + 1}!</button>
         </>
     )
 }
