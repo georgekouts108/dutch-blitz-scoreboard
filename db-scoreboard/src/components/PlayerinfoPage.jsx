@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import symbol1 from '../images/db_card_icons/symbol_1.png'
@@ -30,29 +30,40 @@ function PlayerinfoPage() {
     
     const confirmPlayerInfo = (event) => {
         event.preventDefault();
-        console.log("Player names:");
-        console.log(playerNames);
         
-        const finalPlayerInfo = []
-        let playerCount = 0
-        for (let p = 0; p < playerNames.length; p++){
-            if (playerNames[p] !== ''){
-                playerCount++;
-                const next_player = {
-                    pid: p,
-                    pname: playerNames[p],
-                    pnum: playerCount
-                }
-                finalPlayerInfo.push(next_player)
+        let validNameCount = 0
+        for (let p = 0; p < playerNames.length; p++) {
+            if (playerNames[p] !== ""){
+                validNameCount++;
             }
         }
+
+        if (validNameCount < 2) {
+            alert("ERROR: You must include between 2-12 names.")
+        }
+        else {
         
-        navigate('/winning-points', { 
-            state: { 
-                players: finalPlayerInfo,
-                playerNames: playerNames
-            } 
-        });
+            const finalPlayerInfo = []
+            let playerCount = 0
+            for (let p = 0; p < playerNames.length; p++){
+                if (playerNames[p] !== ''){
+                    playerCount++;
+                    const next_player = {
+                        pid: p,
+                        pname: playerNames[p],
+                        pnum: playerCount
+                    }
+                    finalPlayerInfo.push(next_player)
+                }
+            }
+        
+            navigate('/winning-points', { 
+                state: { 
+                    players: finalPlayerInfo,
+                    playerNames: playerNames
+                } 
+            });
+        }   
     }
     
     const updatePlayerName = (index, value) => {
@@ -126,7 +137,7 @@ function PlayerinfoPage() {
                 </div>
                 <br/>
                 <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                <button type="submit">Confirm</button>
+                <button type="submit">Confirm Player Information</button>
             </form>
             </div>
             <br></br>
