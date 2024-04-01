@@ -49,9 +49,9 @@ function PlayerinfoPage() {
                 if (playerNames[p] !== ''){
                     playerCount++;
                     const next_player = {
-                        pid: p,
-                        pname: playerNames[p],
-                        pnum: playerCount
+                        id: p,
+                        name: playerNames[p],
+                        num: playerCount
                     }
                     finalPlayerInfo.push(next_player)
                 }
