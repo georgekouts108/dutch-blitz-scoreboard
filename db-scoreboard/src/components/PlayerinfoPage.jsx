@@ -86,11 +86,11 @@ function PlayerinfoPage() {
                             <img src={cardSymbols[index]} alt="hhh" height={150} width={150}/>
                             </div>
                             
-                            <input 
+                            <input id={"playerNameID_"+(index)}
                                 type="text" 
                                 value={value} 
                                 onChange={(e) => updatePlayerName(index, e.target.value)}
-                                placeholder={`Player ${index + 1}'s Name`} 
+                                placeholder={`Your Name Here`} 
                             />
                             <br/><br/>
                         </div>
@@ -105,11 +105,11 @@ function PlayerinfoPage() {
                             <img src={cardSymbols[index+4]} alt="hhh" height={150} width={150}/>
                             </div>
                             
-                            <input 
+                            <input id={"playerNameID_"+(index+4)}
                                 type="text" 
                                 value={value} 
                                 onChange={(e) => updatePlayerName(index+4, e.target.value)}
-                                placeholder={`Player ${index+4 + 1}'s Name`} 
+                                placeholder={`Your Name Here`} 
                             />
                             <br/><br/>
                         </div>
@@ -124,11 +124,11 @@ function PlayerinfoPage() {
                             <img src={cardSymbols[index+8]} alt="hhh" height={150} width={150}/>
                             </div>
                             
-                            <input 
+                            <input id={"playerNameID_"+(index+8)}
                                 type="text" 
                                 value={value} 
                                 onChange={(e) => updatePlayerName(index+8, e.target.value)}
-                                placeholder={`Player ${index+8 + 1}'s Name`} 
+                                placeholder={`Your Name Here`} 
                             />
                             <br/><br/>
                         </div>
@@ -137,7 +137,7 @@ function PlayerinfoPage() {
                 </div>
                 <br/>
                 <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                <button type="submit">Confirm Player Information</button>
+                <button type="submit">Confirm Player Information</button><br /><br />
             </form>
             </div>
             <br></br>
