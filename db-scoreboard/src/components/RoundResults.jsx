@@ -35,12 +35,8 @@ function RoundResults() {
     const updateCount = (pid, category, amount, up) => {
         const tempRoundResults = [...roundResults]
         
-        console.log("HOWS IT GOING? temproundresults:")
-        console.log(tempRoundResults)
-
         for (let t = 0 ; t < tempRoundResults.length; t++) {
             if (tempRoundResults[t].pid === pid) {
-                console.log("HEY! t="+t+", pid="+tempRoundResults[t].pid+", pname="+tempRoundResults[t].pname)
                 if (category === 'dutch') {
                     if (up) {
                         tempRoundResults[t].dutch = Math.min(40, tempRoundResults[t].dutch + amount)
@@ -74,8 +70,7 @@ function RoundResults() {
         }
 
         setRoundResults(temp)
-        console.log("DEBUGGG 1")
-        console.log(roundResults)
+
 
         // update the ranks for all players, based on their new grand totals
         const pnums = []
