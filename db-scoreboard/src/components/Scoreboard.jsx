@@ -8,20 +8,20 @@ function Scoreboard() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const dummyPlayers = [
-        {id: 0, name: 'Dimitri', num: 1, grandTotal: 0, rank: '1st'},
-        {id: 1, name: 'George', num: 2, grandTotal: 0, rank: '1st'},
-        {id: 10, name: 'Michael', num: 3, grandTotal: 0, rank: '1st'}
-    ]
-
-    //const [players, setPlayers] = useState(dummyPlayers); // this is temporary
-    
     const [players, setPlayers] = useState(location.state?.players);
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
     const [roundCount, setRoundCount] = useState(location.state?.roundNumber);
 
-
     const startNewRound = () => {
+        const _players = [...players]
+        for (let p = 0; p < _players.length; p++){
+            _players[p].blitz = 0;
+            _players[p].dutch = 0;
+            _players[p].proundTotal = 0;
+        }
+        setPlayers(_players)
+
+
         navigate('/round-in-progress', { 
             state: { 
                 roundNumber: roundCount + 1,

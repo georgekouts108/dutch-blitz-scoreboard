@@ -20,57 +20,59 @@ function RoundResults() {
                 pname: players[p].name,
                 prank: players[p].rank,
                 pgrandTotal: players[p].grandTotal,
+                proundTotal:0,
                 pnum: players[p].num,
                 dutch:0, 
-                blitz:0, 
-                scoreConfirmed:false
+                blitz:0
             }
             _ri.push(_next)
         }
     }
    
- 
     // this array will eventually update the grand total fields in "player"
     const [roundResults, setRoundResults] = useState(_ri)
 
-    const [scoreConfirmCount, setScoreConfirmCount] = useState(0)
-    const [playerCount, setPlayerCount] = useState(players.length)
-    
     const updateCount = (pnum, category, amount, up) => {
         const tempRoundResults = [...roundResults]
-        
-        if (category === 'dutch') {
-            if (up) {
-                tempRoundResults[pnum - 1].dutch = Math.min(40, tempRoundResults[pnum - 1].dutch + amount)
-            }
-            else {
-                tempRoundResults[pnum - 1].dutch = Math.max(0, tempRoundResults[pnum - 1].dutch - amount)
+        for (let t = 0 ; t < tempRoundResults.length; t++) {
+            if (tempRoundResults[t].pnum === pnum) {
+                console.log("HEY! pnum="+tempRoundResults[t].pnum+", pname="+tempRoundResults[t].pname)
+                if (category === 'dutch') {
+                    if (up) {
+                        tempRoundResults[t].dutch = Math.min(40, tempRoundResults[t].dutch + amount)
+                    }
+                    else {
+                        tempRoundResults[t].dutch = Math.max(0, tempRoundResults[t].dutch - amount)
+                    }
+                }
+                else if (category === 'blitz') {
+                    if (up) {
+                        tempRoundResults[t].blitz = Math.min(10, tempRoundResults[t].blitz + amount)
+                    }
+                    else {
+                        tempRoundResults[t].blitz = Math.max(0, tempRoundResults[t].blitz - amount)
+                    }
+                }
+                tempRoundResults[pnum - 1].proundTotal = tempRoundResults[pnum - 1].dutch - (2 * tempRoundResults[pnum - 1].blitz)
+                break;
             }
         }
-        else if (category === 'blitz') {
-            if (up) {
-                tempRoundResults[pnum - 1].blitz = Math.min(10, tempRoundResults[pnum - 1].blitz + amount)
-            }
-            else {
-                tempRoundResults[pnum - 1].blitz = Math.max(0, tempRoundResults[pnum - 1].blitz - amount)
-            }
-        }
-        
-        setRoundResults(tempRoundResults)
-        console.log(roundResults)
-    }
 
-    const confirmPlayerScore = (pnum) => {
-        const tempRoundResults = [...roundResults]
-        let roundScore = tempRoundResults[pnum - 1].dutch - (2 * tempRoundResults[pnum - 1].blitz)
-        tempRoundResults[pnum - 1].pgrandTotal = tempRoundResults[pnum - 1].pgrandTotal + roundScore
-        tempRoundResults[pnum - 1].scoreConfirmed = true
-        setScoreConfirmCount(scoreConfirmCount + 1)
         setRoundResults(tempRoundResults)
     }
 
     const confirmResults = () => {
         
+        const temp = [...roundResults]
+
+        for (let i = 0; i < temp.length; i++){
+            temp[i].pgrandTotal = temp[i].pgrandTotal + temp[i].proundTotal
+        }
+
+        setRoundResults(temp)
+        console.log("DEBUGGG 1")
+        console.log(roundResults)
+
         // update the ranks for all players, based on their new grand totals
         const pnums = []
         const pgtotals = []
@@ -104,11 +106,10 @@ function RoundResults() {
                 let _pnum = rankClassifications[rc][i]
                 tempRoundResults[_pnum - 1].prank = getPlace(rc + 1)
             }
-        }
+        }    
         setRoundResults(tempRoundResults)
 
-        const updatedPlayers = []
-
+        const updatedPlayers=[]
         for (let i = 0; i < roundResults.length; i++) {
             updatedPlayers.push({
                 id: roundResults[i].pid,
@@ -162,22 +163,21 @@ function RoundResults() {
                                             <b>{player.pname}</b>
                                             <h3>Number of Dutch Cards: {roundResults[player.pnum - 1].dutch}</h3>
                                             
-                                            <button disabled={player.scoreConfirmed===true || roundResults[player.pnum - 1].dutch===0} onClick={() => updateCount(player.pnum,'dutch',1,false)} >-1</button>
-                                            <button disabled={player.scoreConfirmed===true || roundResults[player.pnum - 1].dutch===0} onClick={() => updateCount(player.pnum,'dutch',5,false)}>-5</button>
-                                            <button disabled={player.scoreConfirmed===true || roundResults[player.pnum - 1].dutch===40} onClick={() => updateCount(player.pnum,'dutch',5,true)}>+5</button>
-                                            <button disabled={player.scoreConfirmed===true || roundResults[player.pnum - 1].dutch===40} onClick={() => updateCount(player.pnum,'dutch',1,true)}>+1</button>
+                                            <button disabled={roundResults[player.pnum - 1].dutch===0} onClick={() => updateCount(player.pnum,'dutch',1,false)} >-1</button>
+                                            <button disabled={roundResults[player.pnum - 1].dutch===0} onClick={() => updateCount(player.pnum,'dutch',5,false)}>-5</button>
+                                            <button disabled={roundResults[player.pnum - 1].dutch===40} onClick={() => updateCount(player.pnum,'dutch',5,true)}>+5</button>
+                                            <button disabled={roundResults[player.pnum - 1].dutch===40} onClick={() => updateCount(player.pnum,'dutch',1,true)}>+1</button>
                                             
                                         
                                             <h3>Number of Blitz Cards: {roundResults[player.pnum - 1].blitz}</h3>
 
-                                            <button disabled={player.scoreConfirmed===true || roundResults[player.pnum - 1].blitz===0} onClick={() => updateCount(player.pnum,'blitz',1,false)} >-1</button>
-                                            <button disabled={player.scoreConfirmed===true || roundResults[player.pnum - 1].blitz===10} onClick={() => updateCount(player.pnum,'blitz',1,true)}>+1</button>
+                                            <button disabled={roundResults[player.pnum - 1].blitz===0} onClick={() => updateCount(player.pnum,'blitz',1,false)} >-1</button>
+                                            <button disabled={roundResults[player.pnum - 1].blitz===10} onClick={() => updateCount(player.pnum,'blitz',1,true)}>+1</button>
                                             
                                         
                                             <br/><br/>
                                         </div>
                                     }
-                                    <button disabled={player.scoreConfirmed===true} onClick={() => confirmPlayerScore(player.pnum)}>Confirm Score</button>
                                     <br/><br/>
                                     <hr></hr>
                             </div>
@@ -187,7 +187,7 @@ function RoundResults() {
                 <br></br>
             </div>
 
-            <button disabled={scoreConfirmCount < playerCount} onClick={confirmResults}>Continue</button>
+            <button onClick={confirmResults}>Continue</button>
         </>
     )
 }
