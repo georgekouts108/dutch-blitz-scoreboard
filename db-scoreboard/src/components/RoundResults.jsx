@@ -23,7 +23,8 @@ function RoundResults() {
                 proundTotal:0,
                 pnum: players[p].num,
                 dutch:0, 
-                blitz:0
+                blitz:0,
+                scoreConfirmed:false
             }
             _ri.push(_next)
         }
@@ -31,6 +32,9 @@ function RoundResults() {
    
     // this array will eventually update the grand total fields in "player"
     const [roundResults, setRoundResults] = useState(_ri)
+
+    const [scoreConfirmCount, setScoreConfirmCount] = useState(0)
+    const [playerCount, setPlayerCount] = useState(players.length)
 
     const updateCount = (pid, category, amount, up) => {
         const tempRoundResults = [...roundResults]
@@ -58,6 +62,19 @@ function RoundResults() {
             }
         }
 
+        setRoundResults(tempRoundResults)
+    }
+
+    const confirmPlayerScore = (pid) => {
+        const tempRoundResults = [...roundResults]
+        for (let t = 0; t < tempRoundResults.length; t++) {
+            if (tempRoundResults[t].pid === pid) {
+                tempRoundResults[t].scoreConfirmed = true
+                break;
+            }
+        }   
+        
+        setScoreConfirmCount(scoreConfirmCount + 1)
         setRoundResults(tempRoundResults)
     }
 
@@ -163,20 +180,21 @@ function RoundResults() {
                                             
                                             <h3>Number of Dutch Cards: {player.dutch}</h3>
                                             
-                                            <button  onClick={() => updateCount(player.pid,'dutch',1,false)} >-1</button>
-                                            <button  onClick={() => updateCount(player.pid,'dutch',5,false)}>-5</button>
-                                            <button onClick={() => updateCount(player.pid,'dutch',5,true)}>+5</button>
-                                            <button  onClick={() => updateCount(player.pid,'dutch',1,true)}>+1</button>
+                                            <button disabled={player.scoreConfirmed===true || player.dutch===0} onClick={() => updateCount(player.pid,'dutch',1,false)} >-1</button>
+                                            <button disabled={player.scoreConfirmed===true || player.dutch===0} onClick={() => updateCount(player.pid,'dutch',5,false)}>-5</button>
+                                            <button disabled={player.scoreConfirmed===true || player.dutch===40} onClick={() => updateCount(player.pid,'dutch',5,true)}>+5</button>
+                                            <button disabled={player.scoreConfirmed===true || player.dutch===40} onClick={() => updateCount(player.pid,'dutch',1,true)}>+1</button>
                                             
                                             <h3>Number of Blitz Cards: {player.blitz}</h3>
 
-                                            <button  onClick={() => updateCount(player.pid,'blitz',1,false)} >-1</button>
-                                            <button onClick={() => updateCount(player.pid,'blitz',1,true)}>+1</button>
+                                            <button disabled={player.scoreConfirmed===true || player.blitz===0} onClick={() => updateCount(player.pid,'blitz',1,false)} >-1</button>
+                                            <button disabled={player.scoreConfirmed===true || player.blitz===10} onClick={() => updateCount(player.pid,'blitz',1,true)}>+1</button>
                                             
                                         
                                             <br/><br/>
                                         </div>
                                     }
+                                    <button disabled={player.scoreConfirmed===true} onClick={() => confirmPlayerScore(player.pid)}>Confirm Score</button>
                                     <br/><br/>
                                     <hr></hr>
                             </div>
@@ -186,7 +204,7 @@ function RoundResults() {
                 <br></br>
             </div>
 
-            <button onClick={confirmResults}>Continue</button>
+            <button disabled={scoreConfirmCount < playerCount} onClick={confirmResults}>Continue</button>
         </>
     )
 }
