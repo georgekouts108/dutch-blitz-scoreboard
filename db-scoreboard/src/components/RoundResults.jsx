@@ -32,11 +32,15 @@ function RoundResults() {
     // this array will eventually update the grand total fields in "player"
     const [roundResults, setRoundResults] = useState(_ri)
 
-    const updateCount = (pnum, category, amount, up) => {
+    const updateCount = (pid, category, amount, up) => {
         const tempRoundResults = [...roundResults]
+        
+        console.log("HOWS IT GOING? temproundresults:")
+        console.log(tempRoundResults)
+
         for (let t = 0 ; t < tempRoundResults.length; t++) {
-            if (tempRoundResults[t].pnum === pnum) {
-                console.log("HEY! pnum="+tempRoundResults[t].pnum+", pname="+tempRoundResults[t].pname)
+            if (tempRoundResults[t].pid === pid) {
+                console.log("HEY! t="+t+", pid="+tempRoundResults[t].pid+", pname="+tempRoundResults[t].pname)
                 if (category === 'dutch') {
                     if (up) {
                         tempRoundResults[t].dutch = Math.min(40, tempRoundResults[t].dutch + amount)
@@ -53,7 +57,7 @@ function RoundResults() {
                         tempRoundResults[t].blitz = Math.max(0, tempRoundResults[t].blitz - amount)
                     }
                 }
-                tempRoundResults[pnum - 1].proundTotal = tempRoundResults[pnum - 1].dutch - (2 * tempRoundResults[pnum - 1].blitz)
+                tempRoundResults[t].proundTotal = tempRoundResults[t].dutch - (2 * tempRoundResults[t].blitz)
                 break;
             }
         }
@@ -161,18 +165,18 @@ function RoundResults() {
                                         <div>
                                             <img src={cardSymbols[player.pid]} alt="hhh" height={60} width={60}/>
                                             <b>{player.pname}</b>
-                                            <h3>Number of Dutch Cards: {roundResults[player.pnum - 1].dutch}</h3>
                                             
-                                            <button disabled={roundResults[player.pnum - 1].dutch===0} onClick={() => updateCount(player.pnum,'dutch',1,false)} >-1</button>
-                                            <button disabled={roundResults[player.pnum - 1].dutch===0} onClick={() => updateCount(player.pnum,'dutch',5,false)}>-5</button>
-                                            <button disabled={roundResults[player.pnum - 1].dutch===40} onClick={() => updateCount(player.pnum,'dutch',5,true)}>+5</button>
-                                            <button disabled={roundResults[player.pnum - 1].dutch===40} onClick={() => updateCount(player.pnum,'dutch',1,true)}>+1</button>
+                                            <h3>Number of Dutch Cards: {player.dutch}</h3>
                                             
-                                        
-                                            <h3>Number of Blitz Cards: {roundResults[player.pnum - 1].blitz}</h3>
+                                            <button  onClick={() => updateCount(player.pid,'dutch',1,false)} >-1</button>
+                                            <button  onClick={() => updateCount(player.pid,'dutch',5,false)}>-5</button>
+                                            <button onClick={() => updateCount(player.pid,'dutch',5,true)}>+5</button>
+                                            <button  onClick={() => updateCount(player.pid,'dutch',1,true)}>+1</button>
+                                            
+                                            <h3>Number of Blitz Cards: {player.blitz}</h3>
 
-                                            <button disabled={roundResults[player.pnum - 1].blitz===0} onClick={() => updateCount(player.pnum,'blitz',1,false)} >-1</button>
-                                            <button disabled={roundResults[player.pnum - 1].blitz===10} onClick={() => updateCount(player.pnum,'blitz',1,true)}>+1</button>
+                                            <button  onClick={() => updateCount(player.pid,'blitz',1,false)} >-1</button>
+                                            <button onClick={() => updateCount(player.pid,'blitz',1,true)}>+1</button>
                                             
                                         
                                             <br/><br/>
