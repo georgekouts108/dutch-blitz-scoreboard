@@ -12,7 +12,8 @@ function RoundInProgress() {
         navigate('/round-results', { 
             state: { 
                 roundNumber: roundNum,
-                players: players
+                players: players,
+                pointsToWin: location.state?.pointsToWin
             } 
         });
     }

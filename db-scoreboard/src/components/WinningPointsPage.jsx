@@ -27,7 +27,8 @@ function WinningPointsPage() {
         navigate('/scoreboard', { 
             state: { 
                 players: players,
-                pointsToWin: winningPoints
+                pointsToWin: winningPoints,
+                roundNumber: 0
             } 
         });
     }

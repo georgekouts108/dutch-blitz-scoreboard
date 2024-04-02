@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { cardSymbols } from "../assets/card_symbols/card_symbols";
+import { Ranks } from "../assets/ranks";
 
 function RoundResults() {
     const navigate = useNavigate();
@@ -69,8 +70,81 @@ function RoundResults() {
     }
 
     const confirmResults = () => {
-        console.log("todo")
-        console.log(roundResults)
+        
+        // update the ranks for all players, based on their new grand totals
+        const pnums = []
+        const pgtotals = []
+        const scores_with_indexes = []
+
+        for (let r = 0; r < roundResults.length; r++){
+            pnums.push(roundResults[r].pnum)
+            pgtotals.push(roundResults[r].pgrandTotal)
+            scores_with_indexes.push([r, roundResults[r].pgrandTotal])
+        }
+        scores_with_indexes.sort((a, b) => b[1] - a[1]);
+        pgtotals.sort((a, b) => b - a);
+
+        const pgtotalsNoDups = pgtotals.filter((value, index, array) => array.indexOf(value) === index);
+        pgtotalsNoDups.sort((a, b) => b - a);
+
+        const rankClassifications = []
+        for (let pgt = 0; pgt < pgtotalsNoDups.length; pgt++) {
+            const achievers = []
+            for (let swi = 0; swi < scores_with_indexes.length; swi++) {
+                if (scores_with_indexes[swi][1]===pgtotalsNoDups[pgt]){
+                    achievers.push(scores_with_indexes[swi][0]+1)
+                }
+            }
+            rankClassifications.push(achievers);
+        }
+        
+        const tempRoundResults = [...roundResults]
+        for (let rc = 0; rc < rankClassifications.length; rc++) {
+            for (let i = 0; i < rankClassifications[rc].length; i++){
+                let _pnum = rankClassifications[rc][i]
+                tempRoundResults[_pnum - 1].prank = getPlace(rc + 1)
+            }
+        }
+        setRoundResults(tempRoundResults)
+
+        const updatedPlayers = []
+
+        for (let i = 0; i < roundResults.length; i++) {
+            updatedPlayers.push({
+                id: roundResults[i].pid,
+                name: roundResults[i].pname,
+                num: roundResults[i].pnum,
+                grandTotal: roundResults[i].pgrandTotal,
+                rank: roundResults[i].prank
+            })
+        }
+
+        navigate('/scoreboard', { 
+            state: { 
+                roundNumber: location.state?.roundNumber,
+                players: updatedPlayers,
+                pointsToWin: location.state?.pointsToWin
+            } 
+        });
+
+    }
+    const getPlace = (place) => {
+        let _place = Ranks.FIRST;
+        switch (place) {
+            case 1: _place = Ranks.FIRST; break;
+            case 2: _place = Ranks.SECOND; break;
+            case 3: _place = Ranks.THIRD; break;
+            case 4: _place = Ranks.FOURTH; break;
+            case 5: _place = Ranks.FIFTH; break;
+            case 6: _place = Ranks.SIXTH; break;
+            case 7: _place = Ranks.SEVENTH; break;
+            case 8: _place = Ranks.EIGHTH; break;
+            case 9: _place = Ranks.NINETH; break;
+            case 10: _place = Ranks.TENTH; break;
+            case 11: _place = Ranks.ELEVENTH; break;
+            case 12: _place = Ranks.TWELVETH; break;
+        }
+        return _place;
     }
     
     return (

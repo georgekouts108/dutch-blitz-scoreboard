@@ -14,23 +14,33 @@ function Scoreboard() {
         {id: 10, name: 'Michael', num: 3, grandTotal: 0, rank: '1st'}
     ]
 
-    const [players, setPlayers] = useState(dummyPlayers); // this is temporary
-    //const [players, setPlayers] = useState(location.state?.players);
+    //const [players, setPlayers] = useState(dummyPlayers); // this is temporary
+    
+    const [players, setPlayers] = useState(location.state?.players);
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
-    const [roundCount, setRoundCount] = useState(0);
+    const [roundCount, setRoundCount] = useState(location.state?.roundNumber);
 
 
     const startNewRound = () => {
         setRoundCount(roundCount + 1);
+
+        navigate('/round-in-progress', { 
+            state: { 
+                roundNumber: roundCount,
+                players: players,
+                pointsToWin: pointsToWin
+            } 
+        });
     }
     useEffect(() => {
         if (roundCount > 0){
-            navigate('/round-in-progress', { 
-                state: { 
-                    roundNumber: roundCount,
-                    players: players
-                } 
-            });
+            // navigate('/round-in-progress', { 
+            //     state: { 
+            //         roundNumber: roundCount,
+            //         players: players,
+            //         pointsToWin: pointsToWin
+            //     } 
+            // });
         }
         
     }, [roundCount])
