@@ -15,7 +15,7 @@ function WinningPointsPage() {
         setWinningPoints(up ? Math.min(150, winningPoints + amount) : Math.max(75, winningPoints - amount));
     }
 
-    const startGame = () => {
+    const goToNextStep = () => {
         
         for (let p = 0; p < players.length; p++) {
             players[p].grandTotal = 0
@@ -23,11 +23,11 @@ function WinningPointsPage() {
             players[p].rank = Ranks.FIRST
         }
 
-        navigate('/scoreboard', { 
+        navigate('/round-time-limit', { 
             state: { 
                 players: players,
                 pointsToWin: winningPoints,
-                roundNumber: 0
+                // roundNumber: 0
             } 
         });
     }
@@ -42,7 +42,9 @@ function WinningPointsPage() {
             <button disabled={winningPoints===75} onClick={() => changeWinningPoints(false, 1)}>-1</button>
             <button disabled={winningPoints===150} onClick={() => changeWinningPoints(true, 1)}>+1</button>
             <br/><br/><br/>
-            <button onClick={startGame}>Start Game!</button><br/><br/>
+            
+            <button onClick={goToNextStep}>Confirm</button><br/><br/>
+            
             <button onClick={() => navigate(`/player-info`, { 
                 state: { 
                     playerNames: playerNames,
