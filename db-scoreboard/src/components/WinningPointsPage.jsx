@@ -19,6 +19,7 @@ function WinningPointsPage() {
         console.log("players:")
         for (let p = 0; p < players.length; p++) {
             players[p].grandTotal = 0
+            players[p].proundTotal = 0
             players[p].rank = Ranks.FIRST
             console.log(players[p])
         }
@@ -27,7 +28,8 @@ function WinningPointsPage() {
         navigate('/scoreboard', { 
             state: { 
                 players: players,
-                pointsToWin: winningPoints
+                pointsToWin: winningPoints,
+                roundNumber: 0
             } 
         });
     }

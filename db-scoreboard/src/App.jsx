@@ -9,6 +9,7 @@ import PlayerinfoPage from './components/PlayerinfoPage';
 import WinningPointsPage from './components/WinningPointsPage';
 import Scoreboard from './components/Scoreboard';
 import RoundInProgress from './components/RoundInProgress';
+import RoundResults from './components/RoundResults';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/winning-points" Component={WinningPointsPage}/>
           <Route path="/scoreboard" Component={Scoreboard}/>
           <Route path="round-in-progress" Component={RoundInProgress} />
+          <Route path="round-results" Component={RoundResults} />
         </Routes>
       </Router>
     </>
