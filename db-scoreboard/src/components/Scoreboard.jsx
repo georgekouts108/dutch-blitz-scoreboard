@@ -22,28 +22,14 @@ function Scoreboard() {
 
 
     const startNewRound = () => {
-        setRoundCount(roundCount + 1);
-
         navigate('/round-in-progress', { 
             state: { 
-                roundNumber: roundCount,
+                roundNumber: roundCount + 1,
                 players: players,
                 pointsToWin: pointsToWin
             } 
         });
     }
-    useEffect(() => {
-        if (roundCount > 0){
-            // navigate('/round-in-progress', { 
-            //     state: { 
-            //         roundNumber: roundCount,
-            //         players: players,
-            //         pointsToWin: pointsToWin
-            //     } 
-            // });
-        }
-        
-    }, [roundCount])
 
     return (
         <>
