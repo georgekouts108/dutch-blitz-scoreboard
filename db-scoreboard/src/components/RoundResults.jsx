@@ -9,8 +9,6 @@ function RoundResults() {
 
     const roundNum = location.state?.roundNumber;
     const players = location.state?.players;
-    const roundTimeLimit = location.state?.roundTimeLimit;
-
     
     const _ri = []
     if (players !== undefined){
@@ -142,7 +140,6 @@ function RoundResults() {
                 roundNumber: location.state?.roundNumber,
                 players: updatedPlayers,
                 pointsToWin: location.state?.pointsToWin,
-                roundTimeLimit: roundTimeLimit
             } 
         });
 

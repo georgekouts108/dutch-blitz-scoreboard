@@ -12,7 +12,7 @@ function Scoreboard() {
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
     const [roundCount, setRoundCount] = useState(location.state?.roundNumber);
 
-    const [roundTimeLimit, setRoundTimeLimit] = useState(location.state?.roundTimeLimit);
+    // const [roundTimeLimit, setRoundTimeLimit] = useState(location.state?.roundTimeLimit);
 
     const sortPlayersByRankings = () => {
         const temp = [...players]
@@ -47,7 +47,7 @@ function Scoreboard() {
                 roundNumber: roundCount + 1,
                 players: players,
                 pointsToWin: pointsToWin,
-                roundTimeLimit: roundTimeLimit
+                // roundTimeLimit: roundTimeLimit
             } 
         });
     }
