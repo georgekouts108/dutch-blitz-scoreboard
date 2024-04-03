@@ -9,7 +9,6 @@ function RoundResults() {
 
     const roundNum = location.state?.roundNumber;
     const players = location.state?.players;
-
     
     const _ri = []
     if (players !== undefined){
@@ -140,7 +139,7 @@ function RoundResults() {
             state: { 
                 roundNumber: location.state?.roundNumber,
                 players: updatedPlayers,
-                pointsToWin: location.state?.pointsToWin
+                pointsToWin: location.state?.pointsToWin,
             } 
         });
 

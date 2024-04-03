@@ -16,7 +16,6 @@ function WinningPointsPage() {
     }
 
     const startGame = () => {
-        
         for (let p = 0; p < players.length; p++) {
             players[p].grandTotal = 0
             players[p].proundTotal = 0
@@ -42,7 +41,9 @@ function WinningPointsPage() {
             <button disabled={winningPoints===75} onClick={() => changeWinningPoints(false, 1)}>-1</button>
             <button disabled={winningPoints===150} onClick={() => changeWinningPoints(true, 1)}>+1</button>
             <br/><br/><br/>
+            
             <button onClick={startGame}>Start Game!</button><br/><br/>
+            
             <button onClick={() => navigate(`/player-info`, { 
                 state: { 
                     playerNames: playerNames,
