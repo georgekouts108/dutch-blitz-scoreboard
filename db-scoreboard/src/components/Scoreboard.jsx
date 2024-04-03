@@ -31,7 +31,6 @@ function Scoreboard() {
         sortPlayersByRankings();
     },[])
 
-
     const startNewRound = () => {
         const _players = [...players]
         for (let p = 0; p < _players.length; p++){

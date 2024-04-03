@@ -135,8 +135,8 @@ function RoundResults() {
                 grandTotal: roundResults[i].pgrandTotal,
                 rank: roundResults[i].prank,
                 
-                blitzCount: roundResults[i].blitzCount,
-                pblitzedCurrentRound: false
+                blitzCount: roundResults[i].pblitzCount,
+                blitzedCurrentRound: false
             })
         }
 
