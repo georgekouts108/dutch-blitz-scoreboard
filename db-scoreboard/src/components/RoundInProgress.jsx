@@ -8,11 +8,27 @@ function RoundInProgress() {
 
     const roundNum = location.state?.roundNumber;
     const players = location.state?.players;
-    const [roundOver, setRoundOver]=useState(false)
-    const [blitzerID, setBlitzerID]=useState(-1)
+    const [roundOver, setRoundOver] = useState(false)
+    const [blitzerID, setBlitzerID] = useState(-1)
     
+    const [secondsElapsed, setSecondsElapsed] = useState(0)
+
+    useEffect(()=>{
+        const interval = setInterval(() => {
+            setSecondsElapsed(s => s + 1)
+            if (roundOver) {
+                clearInterval(interval)
+                
+            }  
+
+        }, 1000)
+
+        return () => clearInterval(interval);
+    },[secondsElapsed])
+
     const finishRound = (blitzerID) => {
         setBlitzerID(blitzerID)
+        console.log("that took "+secondsElapsed+" sec.")
         setRoundOver(true);
     }
     useEffect(()=>{
@@ -27,15 +43,20 @@ function RoundInProgress() {
                     roundNumber: roundNum,
                     players: players,
                     pointsToWin: location.state?.pointsToWin,
+                    time: secondsElapsed
                 } 
             });
         }
         
     },[roundOver,blitzerID])
+
     return (
         <>
             <h1>Round {roundNum} in progress</h1>
-            <h3>a stopwatch will go here later</h3>
+                {secondsElapsed >= 60 && (<><h2>{Math.floor(secondsElapsed / 60) } min {(secondsElapsed%60 < 10 ? "0":"" )}{secondsElapsed % 60} sec  </h2></>)}
+                {secondsElapsed < 60 && (<><h2>{(secondsElapsed%60 < 10 ? "0":"" )}{secondsElapsed} sec  </h2></>)}
+                
+            
             <div>
                 {
                     players.map((player) => (
