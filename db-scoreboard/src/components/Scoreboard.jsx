@@ -51,7 +51,6 @@ function Scoreboard() {
     }
     const goHome = () => navigate('/');
     
-    
     return (
         <>
             <h1>Scoreboard</h1>
