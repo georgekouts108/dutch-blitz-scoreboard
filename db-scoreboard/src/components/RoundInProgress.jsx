@@ -43,6 +43,7 @@ function RoundInProgress() {
                     roundNumber: roundNum,
                     players: players,
                     pointsToWin: location.state?.pointsToWin,
+                    time: secondsElapsed
                 } 
             });
         }

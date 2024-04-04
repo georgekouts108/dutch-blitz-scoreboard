@@ -9,6 +9,9 @@ function RoundResults() {
 
     const roundNum = location.state?.roundNumber;
     const players = location.state?.players;
+  
+    const minutes = Math.floor(location.state?.time / 60)
+    const seconds = location.state?.time % 60
     
     const _ri = []
     if (players !== undefined){
@@ -171,7 +174,7 @@ function RoundResults() {
     return (
         <>
             <h1>Enter all the results of Round {roundNum}</h1>
-
+            <h2>Time taken for Round {roundNum}: {minutes > 0 ? `${minutes} min`: ''} {seconds} sec</h2>
             <div>
                 {
                     roundResults.map((player) => (
