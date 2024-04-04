@@ -23,7 +23,9 @@ function RoundResults() {
                 pnum: players[p].num,
                 dutch:0, 
                 blitz:0,
-                scoreConfirmed:false
+                scoreConfirmed:false,
+                pblitzCount: players[p].blitzCount,
+                pblitzedCurrentRound: players[p].blitzedCurrentRound
             }
             _ri.push(_next)
         }
@@ -131,7 +133,10 @@ function RoundResults() {
                 name: roundResults[i].pname,
                 num: roundResults[i].pnum,
                 grandTotal: roundResults[i].pgrandTotal,
-                rank: roundResults[i].prank
+                rank: roundResults[i].prank,
+                
+                blitzCount: roundResults[i].pblitzCount,
+                blitzedCurrentRound: false
             })
         }
 
@@ -184,12 +189,25 @@ function RoundResults() {
                                             <button disabled={player.scoreConfirmed===true || player.dutch===40} onClick={() => updateCount(player.pid,'dutch',5,true)}>+5</button>
                                             <button disabled={player.scoreConfirmed===true || player.dutch===40} onClick={() => updateCount(player.pid,'dutch',1,true)}>+1</button>
                                             
-                                            <h3>Number of Blitz Cards: {player.blitz}</h3>
-
-                                            <button disabled={player.scoreConfirmed===true || player.blitz===0} onClick={() => updateCount(player.pid,'blitz',1,false)} >-1</button>
-                                            <button disabled={player.scoreConfirmed===true || player.blitz===10} onClick={() => updateCount(player.pid,'blitz',1,true)}>+1</button>
                                             
-                                        
+                                            {
+                                                !player.pblitzedCurrentRound && 
+                                                (<>
+                                                    <h3>Number of Blitz Cards: {player.blitz}</h3>
+                                                    <button disabled={player.scoreConfirmed===true || player.blitz===0 } onClick={() => updateCount(player.pid,'blitz',1,false)} >-1</button>
+                                                    <button disabled={player.scoreConfirmed===true || player.blitz===10} onClick={() => updateCount(player.pid,'blitz',1,true)}>+1</button>
+                                                </>
+                                                )
+                                            }
+                                            {
+                                                player.pblitzedCurrentRound &&
+                                                (
+                                                    <>
+                                                    <h1>Blitzed!</h1>
+                                                    </>
+                                                )
+                                            }
+
                                             <br/><br/>
                                         </div>
                                     }
