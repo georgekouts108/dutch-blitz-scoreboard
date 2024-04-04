@@ -45,11 +45,12 @@ function Scoreboard() {
             state: { 
                 roundNumber: roundCount + 1,
                 players: players,
-                pointsToWin: pointsToWin,
-                // roundTimeLimit: roundTimeLimit
+                pointsToWin: pointsToWin
             } 
         });
     }
+    const goHome = () => navigate('/');
+    
     
     return (
         <>
@@ -65,7 +66,7 @@ function Scoreboard() {
                     
                 }<br></br>
             </div>
-            <button>Quit Game</button>
+            <button onClick={goHome}>Quit Game</button>
             <button onClick={startNewRound}>Start Round {roundCount + 1}!</button>
         </>
     )
