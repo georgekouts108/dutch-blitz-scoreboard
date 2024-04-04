@@ -10,6 +10,7 @@ import WinningPointsPage from './components/WinningPointsPage';
 import Scoreboard from './components/Scoreboard';
 import RoundInProgress from './components/RoundInProgress';
 import RoundResults from './components/RoundResults';
+import GameConclusion from './components/GameConclusion';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
           <Route path="/player-info" Component={PlayerinfoPage}/>
           <Route path="/winning-points" Component={WinningPointsPage}/>
           <Route path="/scoreboard" Component={Scoreboard}/>
-          <Route path="round-in-progress" Component={RoundInProgress} />
-          <Route path="round-results" Component={RoundResults} />
+          <Route path="/round-in-progress" Component={RoundInProgress} />
+          <Route path="/round-results" Component={RoundResults} />
+          <Route path="/game-conclusion" Component={GameConclusion}/>
         </Routes>
       </Router>
     </>

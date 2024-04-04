@@ -137,7 +137,7 @@ function RoundResults() {
                 winnerCandidates.push([roundResults[i].pid, roundResults[i].pgrandTotal])
             }
         }
-        console.log(winnerCandidates)
+        
 
         const championIDs = []
         if (winnerCandidates.length > 0) {
@@ -159,10 +159,10 @@ function RoundResults() {
         const updatedPlayers=[]
         for (let i = 0; i < roundResults.length; i++) {
 
-            let didPlayerWin = false;
+            let playerWon = false;
             for (let c = 0; c < championIDs.length; c++) {
                 if (championIDs[c] === roundResults[i].pid) {
-                    didPlayerWin = true;
+                    playerWon = true;
                     break;
                 }
             }
@@ -175,17 +175,30 @@ function RoundResults() {
                 rank: roundResults[i].prank,
                 blitzCount: roundResults[i].pblitzCount,
                 blitzedCurrentRound: false,
-                won: didPlayerWin
+                won: playerWon
             })
         }
 
-        navigate('/scoreboard', { 
-            state: { 
-                roundNumber: location.state?.roundNumber,
-                players: updatedPlayers,
-                pointsToWin: pointsToWin,
-            } 
-        });
+        if (championIDs.length >= 1){
+            navigate('/game-conclusion', { 
+                state: { 
+                    roundNumber: location.state?.roundNumber,
+                    players: updatedPlayers,
+                    pointsToWin: pointsToWin,
+                    championIDs: championIDs
+                } 
+            });
+        }
+        else {
+            navigate('/scoreboard', { 
+                state: { 
+                    roundNumber: location.state?.roundNumber,
+                    players: updatedPlayers,
+                    pointsToWin: pointsToWin,
+                } 
+            });
+        }
+        
 
     }
     const getPlace = (place) => {

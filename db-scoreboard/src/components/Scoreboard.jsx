@@ -49,7 +49,6 @@ function Scoreboard() {
             } 
         });
     }
-    const goHome = () => navigate('/');
     
     return (
         <>
@@ -65,7 +64,7 @@ function Scoreboard() {
                     
                 }<br></br>
             </div>
-            <button onClick={goHome}>Quit Game</button>
+            <button onClick={() => navigate('/')}>Quit Game</button>
             <button onClick={startNewRound}>Start Round {roundCount + 1}!</button>
         </>
     )
