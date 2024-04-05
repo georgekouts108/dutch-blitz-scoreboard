@@ -13,3 +13,6 @@ import symbol12 from '../card_symbols/symbol_12.png'
 
 export const cardSymbols = [symbol1, symbol2, symbol3, symbol4, symbol5, symbol6, symbol7, 
     symbol8, symbol9, symbol10, symbol11, symbol12]
+
+export const cardSymbolNames = ['Yellow Pail','Blue Plow','Red Wagon','Blue Pump','Green Pail',
+'Red Plow','Yellow Wagon','Green Pump','Wheelbarrow','Hat','Watering Can','Broom']

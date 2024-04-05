@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Ranks } from "../assets/ranks";
-import { cardSymbols } from "../assets/card_symbols/card_symbols";
+import { cardSymbols, cardSymbolNames } from "../assets/card_symbols/card_symbols";
+
+import ScoreChart from "./ScoresChart";
 
 
 function GameStatistics() {
@@ -29,6 +31,16 @@ function GameStatistics() {
         }
     }
 
+    const scoresAfterEachRound = []
+    for (let r = 0; r <= roundsPlayed; r++) {
+        scoresAfterEachRound.push({round: (r === 0 ? '' : r )})
+    }
+    for (let p = 0; p < players.length; p++) {
+        for (let r = 0; r < scoresAfterEachRound.length; r++) {
+            scoresAfterEachRound[r][players[p].name+" (Player "+players[p].num+")"] = players[p].scoreHistory[r]
+        }
+    }
+
     const [blitzCountSorting, setBlitzCountSorting] = useState(sortedPlayersByBlitzCount)
     
     const goToFinalScores = () => {
@@ -46,8 +58,13 @@ function GameStatistics() {
         <>
             <h1>Game Statistics</h1>
             <h2>Scores of Each Player</h2>
-
+            <div>
+                <ScoreChart data={scoresAfterEachRound} roundsPlayed={roundsPlayed}/>
+            </div>
+            <br/><br/>
             <hr></hr>
+            <div>
+            
             <h2>Blitz Count Per Player</h2>
 
             <>
@@ -62,6 +79,7 @@ function GameStatistics() {
                     }<br></br>
                 </div>
             </>
+            </div>
             <hr></hr>
             <button onClick={goToFinalScores}>Back To Final Scores</button>
         </>
