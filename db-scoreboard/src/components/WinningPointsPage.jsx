@@ -20,7 +20,7 @@ function WinningPointsPage() {
             players[p].grandTotal = 0
             players[p].proundTotal = 0
             players[p].rank = Ranks.FIRST
-            
+            players[p].won = false
             players[p].blitzCount = 0
             players[p].blitzedCurrentRound = false
         }

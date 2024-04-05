@@ -9,6 +9,7 @@ function RoundResults() {
 
     const roundNum = location.state?.roundNumber;
     const players = location.state?.players;
+    const pointsToWin = location.state?.pointsToWin;
   
     const minutes = Math.floor(location.state?.time / 60)
     const seconds = location.state?.time % 60
@@ -129,27 +130,75 @@ function RoundResults() {
         }    
         setRoundResults(tempRoundResults)
 
+        // here, compute the list of player IDs who have >= points to win, if any
+        const winnerCandidates = []
+        for (let i = 0; i < roundResults.length; i++) {
+            if (roundResults[i].pgrandTotal >= pointsToWin) {
+                winnerCandidates.push([roundResults[i].pid, roundResults[i].pgrandTotal])
+            }
+        }
+        
+
+        const championIDs = []
+        if (winnerCandidates.length > 0) {
+            const winningScores = []
+            for (let w = 0; w < winnerCandidates.length; w++) {
+                winningScores.push(winnerCandidates[w][1])
+            }
+            const winningScoresNoDups = winningScores.filter((value, index, array) => array.indexOf(value) === index);
+            winningScoresNoDups.sort((a, b) => b - a);
+            const highestScore = winningScoresNoDups[0]
+            
+            for (let w = 0; w < winnerCandidates.length; w++) {
+                if (winnerCandidates[w][1] === highestScore) {
+                    championIDs.push(winnerCandidates[w][0])
+                }
+            }
+        }
+
         const updatedPlayers=[]
         for (let i = 0; i < roundResults.length; i++) {
+
+            let playerWon = false;
+            for (let c = 0; c < championIDs.length; c++) {
+                if (championIDs[c] === roundResults[i].pid) {
+                    playerWon = true;
+                    break;
+                }
+            }
+
             updatedPlayers.push({
                 id: roundResults[i].pid,
                 name: roundResults[i].pname,
                 num: roundResults[i].pnum,
                 grandTotal: roundResults[i].pgrandTotal,
                 rank: roundResults[i].prank,
-                
                 blitzCount: roundResults[i].pblitzCount,
-                blitzedCurrentRound: false
+                blitzedCurrentRound: false,
+                won: playerWon
             })
         }
 
-        navigate('/scoreboard', { 
-            state: { 
-                roundNumber: location.state?.roundNumber,
-                players: updatedPlayers,
-                pointsToWin: location.state?.pointsToWin,
-            } 
-        });
+        if (championIDs.length >= 1){
+            navigate('/game-conclusion', { 
+                state: { 
+                    roundNumber: location.state?.roundNumber,
+                    players: updatedPlayers,
+                    pointsToWin: pointsToWin,
+                    championIDs: championIDs
+                } 
+            });
+        }
+        else {
+            navigate('/scoreboard', { 
+                state: { 
+                    roundNumber: location.state?.roundNumber,
+                    players: updatedPlayers,
+                    pointsToWin: pointsToWin,
+                } 
+            });
+        }
+        
 
     }
     const getPlace = (place) => {
