@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Ranks } from "../assets/ranks";
+import { cardSymbols } from "../assets/card_symbols/card_symbols";
 
 function GameStatistics() {
     const navigate = useNavigate();
@@ -45,6 +46,21 @@ function GameStatistics() {
             <h1>Game Statistics</h1>
             <h2>Scores of Each Player</h2>
             <h2>Blitz Count Per Player</h2>
+
+            <>
+        
+                <div>
+                    {
+                        blitzCountSorting.map((player, index) => (
+                            <div key={index} className="row">
+                                <h3><img src={cardSymbols[player.id]} alt="hhh" height={50} width={50}/> ~~ {player.name} ~~ Blitzed {player.blitzCount} time{(player.blitzCount===1 ? '' : 's')}</h3>
+                            </div> 
+                        ))
+                        
+                    }<br></br>
+                </div>
+            </>
+            <hr></hr>
             <button onClick={goToFinalScores}>Back To Final Scores</button>
         </>
     )
