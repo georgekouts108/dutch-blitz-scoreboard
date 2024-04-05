@@ -12,8 +12,6 @@ function Scoreboard() {
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
     const [roundCount, setRoundCount] = useState(location.state?.roundNumber);
 
-    // const [roundTimeLimit, setRoundTimeLimit] = useState(location.state?.roundTimeLimit);
-
     const sortPlayersByRankings = () => {
         const temp = [...players]
         const places = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10nd','11rd','12th']

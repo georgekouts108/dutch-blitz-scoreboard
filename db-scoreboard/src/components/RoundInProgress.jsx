@@ -18,9 +18,7 @@ function RoundInProgress() {
             setSecondsElapsed(s => s + 1)
             if (roundOver) {
                 clearInterval(interval)
-                
             }  
-
         }, 1000)
 
         return () => clearInterval(interval);
@@ -28,7 +26,6 @@ function RoundInProgress() {
 
     const finishRound = (blitzerID) => {
         setBlitzerID(blitzerID)
-        console.log("that took "+secondsElapsed+" sec.")
         setRoundOver(true);
     }
     useEffect(()=>{

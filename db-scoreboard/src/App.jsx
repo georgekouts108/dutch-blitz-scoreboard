@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -11,6 +8,7 @@ import Scoreboard from './components/Scoreboard';
 import RoundInProgress from './components/RoundInProgress';
 import RoundResults from './components/RoundResults';
 import GameConclusion from './components/GameConclusion';
+import GameStatistics from './components/GameStatistics';
 
 function App() {
   return (
@@ -24,6 +22,7 @@ function App() {
           <Route path="/round-in-progress" Component={RoundInProgress} />
           <Route path="/round-results" Component={RoundResults} />
           <Route path="/game-conclusion" Component={GameConclusion}/>
+          <Route path="/game-statistics" Component={GameStatistics}/>
         </Routes>
       </Router>
     </>
