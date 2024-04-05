@@ -12,6 +12,17 @@ function GameConclusion() {
     const roundsPlayed = location.state?.roundNumber;
     const championIDs = location.state?.championIDs;
 
+    const viewStats = () => {
+        navigate('/game-statistics', { 
+            state: { 
+                roundsPlayed: roundsPlayed,
+                players: players,
+                pointsToWin: pointsToWin,
+                championIDs: championIDs
+            } 
+        });
+    }
+
     return (
         <>
             <h1>We have {(championIDs.length > 1) ? "winners" : "a winner" }!</h1>
@@ -26,7 +37,7 @@ function GameConclusion() {
                     
                 }<br></br>
             </div>
-            <button>View Statistics</button>
+            <button onClick={viewStats}>View Statistics</button>
             <button onClick={() => navigate('/')}>Go Home</button>
         </>
     )
