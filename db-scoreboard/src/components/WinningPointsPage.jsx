@@ -23,6 +23,7 @@ function WinningPointsPage() {
             players[p].won = false
             players[p].blitzCount = 0
             players[p].blitzedCurrentRound = false
+            players[p].scoreHistory = [0]
         }
 
         navigate('/scoreboard', { 

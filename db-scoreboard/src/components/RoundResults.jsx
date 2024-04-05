@@ -29,7 +29,8 @@ function RoundResults() {
                 blitz:0,
                 scoreConfirmed:false,
                 pblitzCount: players[p].blitzCount,
-                pblitzedCurrentRound: players[p].blitzedCurrentRound
+                pblitzedCurrentRound: players[p].blitzedCurrentRound,
+                scoreHistory: players[p].scoreHistory
             }
             _ri.push(_next)
         }
@@ -89,6 +90,9 @@ function RoundResults() {
 
         for (let i = 0; i < temp.length; i++){
             temp[i].pgrandTotal = temp[i].pgrandTotal + temp[i].proundTotal
+            const history = temp[i].scoreHistory
+            history.push(temp[i].pgrandTotal)
+            temp[i].scoreHistory = history
         }
 
         setRoundResults(temp)
@@ -175,7 +179,8 @@ function RoundResults() {
                 rank: roundResults[i].prank,
                 blitzCount: roundResults[i].pblitzCount,
                 blitzedCurrentRound: false,
-                won: playerWon
+                won: playerWon,
+                scoreHistory: roundResults[i].scoreHistory
             })
         }
 
