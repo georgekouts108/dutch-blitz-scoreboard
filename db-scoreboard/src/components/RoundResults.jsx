@@ -36,7 +36,6 @@ function RoundResults() {
         }
     }
    
-    // this array will eventually update the grand total fields in "player"
     const [roundResults, setRoundResults] = useState(_ri)
 
     const [scoreConfirmCount, setScoreConfirmCount] = useState(0)
@@ -183,12 +182,22 @@ function RoundResults() {
                 scoreHistory: roundResults[i].scoreHistory
             })
         }
+        
+        const places = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th']
+        const rearranged = []
+        for (let p = 0; p < places.length; p++){
+            for (let q = 0; q < updatedPlayers.length; q++) {
+                if (updatedPlayers[q].rank === places[p]) {
+                    rearranged.push(updatedPlayers[q])
+                }
+            }
+        }
 
         if (championIDs.length >= 1){
             navigate('/game-conclusion', { 
                 state: { 
                     roundNumber: location.state?.roundNumber,
-                    players: updatedPlayers,
+                    players: rearranged,
                     pointsToWin: pointsToWin,
                     championIDs: championIDs
                 } 
@@ -198,7 +207,7 @@ function RoundResults() {
             navigate('/scoreboard', { 
                 state: { 
                     roundNumber: location.state?.roundNumber,
-                    players: updatedPlayers,
+                    players: rearranged,
                     pointsToWin: pointsToWin,
                 } 
             });

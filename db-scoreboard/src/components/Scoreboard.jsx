@@ -12,23 +12,6 @@ function Scoreboard() {
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
     const [roundCount, setRoundCount] = useState(location.state?.roundNumber);
 
-    const sortPlayersByRankings = () => {
-        const temp = [...players]
-        const places = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10nd','11rd','12th']
-        const rearranged = []
-        for (let p = 0; p < places.length; p++){
-            for (let q = 0; q < temp.length; q++) {
-                if (temp[q].rank === places[p]) {
-                    rearranged.push(temp[q])
-                }
-            }
-        }
-        setPlayers(rearranged)
-    }
-    useEffect(()=>{
-        sortPlayersByRankings();
-    },[])
-
     const startNewRound = () => {
         const _players = [...players]
         for (let p = 0; p < _players.length; p++){
