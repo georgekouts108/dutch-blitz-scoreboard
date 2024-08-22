@@ -1,13 +1,52 @@
-.row {
-    width: 100%;
-    margin: 0 auto;
-  }
 .block {
-    width: 230px;
+    width: 23%;
     float: left;
 }
 
 .player-info-form {
     width: auto;
-    margin: auto; 
+    margin: 0;
+    text-align: center;
+}
+
+.icon-card {
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 10%;
+    margin: 3%;
+    width:210px;
+    height:210px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    position:relative;
+  }
+
+  .player-icon-2 {
+    height: 160px;
+    width: 160px;
+    border-width: 40px;
+    border-radius: 20%;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    position:absolute;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+  .text-box {
+    text-align: center;
+    font-size: larger;
+    color: rgb(0, 255, 0);
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    grid-column: 1;
+    grid-row: 7;
+}
+
+.confirm-btn {
+    margin: 3%;
 }

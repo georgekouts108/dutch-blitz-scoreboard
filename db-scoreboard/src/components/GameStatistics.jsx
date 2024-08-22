@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Ranks } from "../assets/ranks";
+import { Ranks } from "../assets/rank_images/ranks";
 import { cardSymbols, cardSymbolNames } from "../assets/card_symbols/card_symbols";
 
 import ScoreChart from "./ScoresChart";

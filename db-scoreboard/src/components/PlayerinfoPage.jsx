@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import '../styles/playerInfoPage.css'
 import { cardSymbols } from "../assets/card_symbols/card_symbols";
+import IconPicker from "./IconPicker";
 
 function PlayerinfoPage() {
     const navigate = useNavigate();
@@ -58,75 +58,20 @@ function PlayerinfoPage() {
     }
  
     return (
-        <>
+        <div className="player-info-form">
             <h1>What are the names and symbols of the players?</h1>
-            <br/>
-            <div className="player-info-form">
-            <form onSubmit={confirmPlayerInfo}>
-                <div className="row">
-                {
-                    playerNames.slice(0,4).map((value, index) => (
-                        <div className="block" key={index}>
-                            <div>
-                            <img src={cardSymbols[index]} alt="hhh" height={150} width={150}/>
+                <form onSubmit={confirmPlayerInfo}>
+                    {
+                        playerNames.map((value, index) => (
+                            <div className="block" key={index}>
+                                <IconPicker _index={index} _value={value} onInputChange={updatePlayerName}/>
                             </div>
-                            
-                            <input id={"playerNameID_"+(index)}
-                                type="text" 
-                                value={value} 
-                                onChange={(e) => updatePlayerName(index, e.target.value)}
-                                placeholder={`Your Name Here`} 
-                            />
-                            <br/><br/>
-                        </div>
-                    ))
-                }
-                </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <div className="row">
-                {
-                    playerNames.slice(4,8).map((value, index) => (
-                        <div className="block" key={index+4}>
-                            <div>
-                            <img src={cardSymbols[index+4]} alt="hhh" height={150} width={150}/>
-                            </div>
-                            
-                            <input id={"playerNameID_"+(index+4)}
-                                type="text" 
-                                value={value} 
-                                onChange={(e) => updatePlayerName(index+4, e.target.value)}
-                                placeholder={`Your Name Here`} 
-                            />
-                            <br/><br/>
-                        </div>
-                    ))
-                }
-                </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <div className="row">
-                {
-                    playerNames.slice(8).map((value, index) => (
-                        <div className="block" key={index+8}>
-                            <div>
-                            <img src={cardSymbols[index+8]} alt="hhh" height={150} width={150}/>
-                            </div>
-                            
-                            <input id={"playerNameID_"+(index+8)}
-                                type="text" 
-                                value={value} 
-                                onChange={(e) => updatePlayerName(index+8, e.target.value)}
-                                placeholder={`Your Name Here`} 
-                            />
-                            <br/><br/>
-                        </div>
-                    ))
-                }
-                </div>
-                <br/>
-                <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
-                <button type="submit">Confirm Player Information</button><br /><br />
-            </form>
-            </div>
+                        ))
+                    }
+                    <button className="confirm-btn" type="submit">Confirm Player Information</button><br /><br />
+                </form>
             <br></br>
-        </>
+        </div>
     )
 }
 export default PlayerinfoPage;

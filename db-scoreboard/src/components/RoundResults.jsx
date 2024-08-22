@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { cardSymbols } from "../assets/card_symbols/card_symbols";
-import { Ranks } from "../assets/ranks";
+import { Ranks } from "../assets/rank_images/ranks";
 import { getRoundTimeComment } from "../assets/comments/roundTimeComments";
 
 function RoundResults() {

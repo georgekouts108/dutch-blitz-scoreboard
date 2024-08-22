@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Ranks } from "../assets/ranks";
+import { Ranks } from "../assets/rank_images/ranks";
 
 function WinningPointsPage() {
     const navigate = useNavigate();

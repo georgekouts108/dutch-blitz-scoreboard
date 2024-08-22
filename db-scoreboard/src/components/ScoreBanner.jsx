@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/scoreBanner.css'
 import { cardSymbols } from "../assets/card_symbols/card_symbols";
-import { rankIcons } from "../assets/ranks";
+import { rankIcons } from "../assets/rank_images/ranks";
 
 function ScoreBanner(props) {
     let rank_str = props.p_rank+""
