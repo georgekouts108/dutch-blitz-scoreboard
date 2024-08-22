@@ -7,6 +7,18 @@ function GameConclusion() {
     const location = useLocation();
 
     const players = location.state?.players;
+
+    const winners = []
+    const nonWinners = []
+    for (let p = 0; p < players.length; p++) {
+        if (players[p].won) {
+            winners.push(players[p]);
+        }
+        else {
+            nonWinners.push(players[p])
+        }
+    }
+
     const pointsToWin = location.state?.pointsToWin;
     const roundsPlayed = location.state?.roundNumber;
     const championIDs = location.state?.championIDs;
@@ -27,9 +39,19 @@ function GameConclusion() {
             <h1>We have {(championIDs.length > 1) ? "winners" : "a winner" }!</h1>
             <div>
                 {
-                    players.map((player, index) => (
+                    winners.map((player, index) => (
                         <div key={index} className="row">
-                            {player.won && (<h3>WINNER:</h3>)}
+                            <ScoreBanner p_rank={player.rank} p_id={player.id} p_name={player.name} p_grandTotal={player.grandTotal} />
+                        </div> 
+                    ))
+                    
+                }<br></br>
+            </div>
+            <hr/><hr/><hr/><br></br>
+            <div>
+                {
+                    nonWinners.map((player, index) => (
+                        <div key={index} className="row">
                             <ScoreBanner p_rank={player.rank} p_id={player.id} p_name={player.name} p_grandTotal={player.grandTotal} />
                         </div> 
                     ))
