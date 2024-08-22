@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { cardSymbols } from "../assets/card_symbols/card_symbols";
 import { Ranks } from "../assets/ranks";
+import { getRoundTimeComment } from "../assets/comments/roundTimeComments";
 
 function RoundResults() {
     const navigate = useNavigate();
@@ -35,7 +36,7 @@ function RoundResults() {
             _ri.push(_next)
         }
     }
-   
+    const [timeComment, setTimeComment] = useState(getRoundTimeComment(location.state?.time))
     const [roundResults, setRoundResults] = useState(_ri)
 
     const [scoreConfirmCount, setScoreConfirmCount] = useState(0)
@@ -238,6 +239,7 @@ function RoundResults() {
         <>
             <h1>Enter all the results of Round {roundNum}</h1>
             <h2>Time taken for Round {roundNum}: {minutes > 0 ? `${minutes} min`: ''} {seconds} sec</h2>
+            <h2>{timeComment}</h2>
             <div>
                 {
                     roundResults.map((player) => (
