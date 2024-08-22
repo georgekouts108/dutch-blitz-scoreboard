@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Ranks } from "../assets/ranks";
-
-import SBoardRow from "./SBoardRow";
+import ScoreBanner from "./ScoreBanner";
 
 function Scoreboard() {
     const navigate = useNavigate();
@@ -33,16 +31,17 @@ function Scoreboard() {
     
     return (
         <>
-            <h1>Scoreboard</h1>
-            <h2>Be the first to reach {pointsToWin} points or more!</h2>
+            <div>
+                <h1>SCORES</h1>
+                <h2>Thou must reach {pointsToWin} points to win</h2>
+            </div>
             <div>
                 {
                     players.map((player, index) => (
                         <div key={index} className="row">
-                            <SBoardRow p_rank={player.rank} p_id={player.id} p_name={player.name} p_grandTotal={player.grandTotal} />
+                            <ScoreBanner p_rank={player.rank} p_id={player.id} p_name={player.name} p_grandTotal={player.grandTotal}/>
                         </div> 
-                    ))
-                    
+                    )) 
                 }<br></br>
             </div>
             <button onClick={() => navigate('/')}>Quit Game</button>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Ranks } from "../assets/ranks";
-import SBoardRow from "./SBoardRow";
+import ScoreBanner from "./ScoreBanner";
 
 function GameConclusion() {
     const navigate = useNavigate();
@@ -31,7 +30,7 @@ function GameConclusion() {
                     players.map((player, index) => (
                         <div key={index} className="row">
                             {player.won && (<h3>WINNER:</h3>)}
-                            <SBoardRow p_rank={player.rank} p_id={player.id} p_name={player.name} p_grandTotal={player.grandTotal} />
+                            <ScoreBanner p_rank={player.rank} p_id={player.id} p_name={player.name} p_grandTotal={player.grandTotal} />
                         </div> 
                     ))
                     
