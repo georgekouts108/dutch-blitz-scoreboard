@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
+import dbLogo from '../assets/images/db_logo.gif'
 
 function IntroPage() {
     const navigate = useNavigate();
 
     return (
         <>
-            <h1>Dutch Blitz</h1>
+            <img src={dbLogo}/>
             <h2>Scoreboard for the vonderful goot game</h2>
             <button onClick={()=>navigate('/player-info', {
                 state:{editingNames:false}
