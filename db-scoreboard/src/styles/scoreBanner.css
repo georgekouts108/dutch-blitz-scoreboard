@@ -1,7 +1,7 @@
 .score-banner {
     border: 1px solid white;
     border-radius: 20px;
-    box-shadow: 5px 5px 5px green;
+    box-shadow: 5px 5px 5px #ffd694a1;
     padding: 20px;
     margin: 10px;
     width:600px;
