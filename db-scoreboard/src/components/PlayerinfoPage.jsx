@@ -59,7 +59,7 @@ function PlayerinfoPage() {
  
     return (
         <div className="player-info-form">
-            <h1>What are the names and symbols of the players?</h1>
+            <h1>Enter the names of each player<br></br>under their chosen card symbol</h1>
                 <form onSubmit={confirmPlayerInfo}>
                     {
                         playerNames.map((value, index) => (

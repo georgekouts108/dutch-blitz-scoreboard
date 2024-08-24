@@ -37,7 +37,7 @@
   .text-box {
     text-align: center;
     font-size: larger;
-    color: rgb(0, 255, 0);
+    /* color: rgb(0, 255, 0); */
     font-weight: bold;
     font-family: Georgia, 'Times New Roman', Times, serif;
     height: 30px;
