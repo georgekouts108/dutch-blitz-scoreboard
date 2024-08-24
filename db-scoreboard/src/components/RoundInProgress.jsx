@@ -7,6 +7,9 @@ function RoundInProgress() {
     const location = useLocation();
 
     const roundNum = location.state?.roundNumber;
+
+    document.title = "Round "+ roundNum + " - Dutch Blitz Scoreboard"
+
     const players = location.state?.players;
     const [roundOver, setRoundOver] = useState(false)
     const [blitzerID, setBlitzerID] = useState(-1)

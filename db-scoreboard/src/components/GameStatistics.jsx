@@ -7,6 +7,9 @@ import ScoreChart from "./ScoresChart";
 
 
 function GameStatistics() {
+
+    document.title = "Game Statistics - Dutch Blitz Scoreboard"
+
     const navigate = useNavigate();
     const location = useLocation();
 

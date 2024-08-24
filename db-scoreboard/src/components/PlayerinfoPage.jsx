@@ -5,6 +5,8 @@ import { cardSymbols } from "../assets/card_symbols/card_symbols";
 import IconPicker from "./IconPicker";
 
 function PlayerinfoPage() {
+    document.title = "Player Names - Dutch Blitz Scoreboard"
+
     const navigate = useNavigate();
     const location = useLocation();
 

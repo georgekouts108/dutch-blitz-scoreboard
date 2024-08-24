@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Ranks } from "../assets/rank_images/ranks";
 
 function WinningPointsPage() {
+    document.title = "Points to Win - Dutch Blitz Scoreboard"
+
     const navigate = useNavigate();
 
     const location = useLocation();

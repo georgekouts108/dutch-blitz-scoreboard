@@ -4,7 +4,7 @@ import dbLogo from '../assets/images/db_logo.gif'
 
 function IntroPage() {
     const navigate = useNavigate();
-
+    document.title = "Home - Dutch Blitz Scoreboard"
     return (
         <>
             <img src={dbLogo}/>

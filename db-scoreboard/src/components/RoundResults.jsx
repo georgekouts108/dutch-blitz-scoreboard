@@ -9,6 +9,9 @@ function RoundResults() {
     const location = useLocation();
 
     const roundNum = location.state?.roundNumber;
+
+    document.title = "Round "+ roundNum + " Results - Dutch Blitz Scoreboard"
+
     const players = location.state?.players;
     const pointsToWin = location.state?.pointsToWin;
   

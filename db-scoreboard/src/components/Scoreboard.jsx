@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ScoreBanner from "./ScoreBanner";
 
 function Scoreboard() {
+    document.title = "Scores - Dutch Blitz Scoreboard"
+
     const navigate = useNavigate();
     const location = useLocation();
 
