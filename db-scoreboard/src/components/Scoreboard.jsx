@@ -12,6 +12,13 @@ function Scoreboard() {
     const [pointsToWin, setPointsToWin] = useState(location.state?.pointsToWin);
     const [roundCount, setRoundCount] = useState(location.state?.roundNumber);
 
+    const quit = () => {
+        
+        let quit_confirm = confirm("Are you sure you want to quit?");
+        if (quit_confirm) {
+            navigate('/');
+        }
+    }
     const startNewRound = () => {
         const _players = [...players]
         for (let p = 0; p < _players.length; p++){
@@ -33,10 +40,11 @@ function Scoreboard() {
     
     return (
         <>
-            <div>
-                <h1>SCORES</h1>
-                <h2>Thou must reach {pointsToWin} points to win</h2>
+            <div className="scoreboard-title">
+                Scores
             </div>
+                <h1 className="scoreboard-target-points">Thou must reach <span className="points-to-win">{pointsToWin} points</span> to win</h1>
+            
             <div>
                 {
                     players.map((player, index) => (
@@ -46,7 +54,7 @@ function Scoreboard() {
                     )) 
                 }<br></br>
             </div>
-            <button onClick={() => navigate('/')}>Quit Game</button>
+            <button onClick={() => quit()}>Quit Game</button>
             <button onClick={startNewRound}>Start Round {roundCount + 1}!</button>
         </>
     )
